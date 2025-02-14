@@ -7,12 +7,18 @@ def enviar_correo(solicitud):
         msg = Message(
             "Nueva Solicitud de Cotización",
             sender=current_app.config["MAIL_DEFAULT_SENDER"],  # ✅ Asegurar remitente
-            recipients=["anthony.gamio.a@uni.pe", "pccanto@ccapaeirl.com"]  # Cambia esto si necesitas múltiples correos
+            recipients=["anthony.gamio.a@uni.pe"]  # Cambia esto si necesitas múltiples correos
         )
 
         detalles = f"""
         Se ha recibido una nueva solicitud de cotización.
         
+        Cliente: {solicitud.cliente}  
+        Razón Social: {solicitud.razon_social}  
+        RUC: {solicitud.ruc}  
+        Correo: {solicitud.correo}  
+        Teléfono: {solicitud.telefono}  
+
         Código de Atención: {solicitud.codigo_atencion}
         Fecha de Creación: {solicitud.fecha_creacion}
         Incoterm: {solicitud.incoterm}
@@ -21,6 +27,7 @@ def enviar_correo(solicitud):
         Producto: {solicitud.producto}
         Dimensiones: {solicitud.dimensiones}
         Peso: {solicitud.peso} kg
+        Valor: ${solicitud.valor:.2f} USD
         """
 
         # ✅ Agregar campos opcionales si no están vacíos

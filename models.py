@@ -9,6 +9,12 @@ class Solicitud(db.Model):
     codigo_atencion = db.Column(db.String(20), unique=True, nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
     
+    cliente = db.Column(db.String(100), nullable=False)
+    razon_social = db.Column(db.String(200), nullable=False)
+    ruc = db.Column(db.String(11), nullable=False)
+    correo = db.Column(db.String(100), nullable=False)
+    telefono = db.Column(db.String(15), nullable=False)
+
     # Datos principales
     incoterm = db.Column(db.String(10), nullable=False)
     origen = db.Column(db.String(100), nullable=False)
@@ -16,6 +22,7 @@ class Solicitud(db.Model):
     producto = db.Column(db.String(200), nullable=False)
     dimensiones = db.Column(db.String(100), nullable=False)  # "LxAxH cm"
     peso = db.Column(db.Float, nullable=False)  # Kg
+    valor = db.Column(db.Float, nullable=False)
 
     # Datos opcionales
     embalaje = db.Column(db.String(50), nullable=True)
