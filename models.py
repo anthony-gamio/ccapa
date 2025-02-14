@@ -1,9 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
+from extensions import db
+from flask import current_app
 from datetime import datetime
 
-db = SQLAlchemy()
-
 class Solicitud(db.Model):
+    __tablename__ = "logistica_solicitudes"
+    
     id = db.Column(db.Integer, primary_key=True)
     codigo_atencion = db.Column(db.String(20), unique=True, nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)

@@ -3,7 +3,7 @@ from wtforms import StringField, FloatField, SelectField, TextAreaField, SubmitF
 from wtforms.validators import DataRequired, Optional
 
 class SolicitudForm(FlaskForm):
-    incoterm = SelectField("Incoterm", choices=[("EXW", "EXW"), ("FOB", "FOB"), ("CIF", "CIF"), ("DAP", "DAP")], validators=[DataRequired()])
+    incoterm = SelectField("Incoterm", choices=[("EXW", "EXW"), ("FOB", "FOB"), ("CIF", "CIF"), ("DAP", "DAP"), ("DDP", "DDP")], validators=[DataRequired()])
     origen = StringField("Origen", validators=[DataRequired()])
     destino = StringField("Destino", validators=[DataRequired()])
     producto = StringField("Producto", validators=[DataRequired()])
