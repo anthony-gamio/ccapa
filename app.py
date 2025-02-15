@@ -29,7 +29,7 @@ def formulario():
             filename = secure_filename(file.filename)  # Sanitiza el nombre
             filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
             file.save(filepath)  # Guarda el archivo en la carpeta de subida
-            print(f"📂 Archivo guardado en: {filepath}")  # Depuración
+            print(f" Archivo guardado en: {filepath}")  # Depuración
 
         from mailer import enviar_correo
         data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token"]}
