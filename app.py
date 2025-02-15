@@ -29,8 +29,14 @@ def formulario():
             file.save(filepath)  # Guardar archivo en la carpeta
 
         data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token", "archivo"]}
-        data["archivo"] = filename  # Guardar el nombre del archivo en la BD
-        
+        if file:  # Si el usuario adjunta un archivo
+            filename = secure_filename(file.filename)  # Asegurar un nombre de archivo seguro
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(filepath)  # Guardar el archivo en la carpeta
+            data["archivo"] = filename  # ✅ Guardar solo el nombre del archivo en la BD
+        else:
+            data["archivo"] = None  # ✅ Si no hay archivo, guardamos `None`
+
         from mailer import enviar_correo
         data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token"]}
         with app.app_context():
