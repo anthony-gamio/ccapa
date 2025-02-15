@@ -57,6 +57,8 @@ def enviar_correo(solicitud):
                         data=f.read()
                     )
             except FileNotFoundError:
+                print(f"📎 Archivo adjunto: {solicitud.archivo}")  # Depuración
+            except FileNotFoundError:
                 print(f"⚠ Archivo no encontrado: {filepath}")
 
         msg.body = detalles  # Agregamos el mensaje al cuerpo del correo

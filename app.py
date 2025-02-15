@@ -32,7 +32,7 @@ def formulario():
             print(f"📂 Archivo guardado en: {filepath}")  # Depuración
 
         from mailer import enviar_correo
-        data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token", "archivo"]}
+        data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token"]}
         data["archivo"] = filename  # Guarda solo el nombre en la BD
 
         with app.app_context():
