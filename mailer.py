@@ -45,9 +45,12 @@ def enviar_correo(solicitud):
             detalles += f"\nPrioridad: {solicitud.prioridad}"
 
         if solicitud.archivo:
-            filepath = os.path.join("uploads", solicitud.archivo)
-            with open(filepath, "rb") as f:
-                msg.attach(solicitud.archivo, "application/octet-stream", f.read())
+            filepath = os.path.join(current_app.config["UPLOAD_FOLDER"], solicitud.archivo)
+            try:
+                with open(filepath, "rb") as f:
+                    msg.attach(solicitud.archivo, "application/octet-stream", f.read())
+            except FileNotFoundError:
+                print(f"⚠ Archivo no encontrado: {filepath}")
 
         msg.body = detalles  # ✅ Agregamos el mensaje al cuerpo del correo
 

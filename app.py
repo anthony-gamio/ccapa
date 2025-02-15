@@ -20,15 +20,9 @@ mail.init_app(app)
 def formulario():
     form = SolicitudForm()
     if form.validate_on_submit():
-        file = form.archivo.data
-        filename = None
+        file = request.files["archivo"]  # Obtiene el archivo
+        filename = None  # Iniciar variable para evitar errores si no se sube archivo
 
-        if file:  # Si el usuario adjunta un archivo
-            filename = secure_filename(file.filename)  # Asegurar nombre seguro
-            filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-            file.save(filepath)  # Guardar archivo en la carpeta
-
-        data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token", "archivo"]}
         if file:  # Si el usuario adjunta un archivo
             filename = secure_filename(file.filename)  # Asegurar un nombre de archivo seguro
             filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
@@ -39,6 +33,7 @@ def formulario():
 
         from mailer import enviar_correo
         data = {key: value for key, value in form.data.items() if key not in ["submit", "csrf_token"]}
+
         with app.app_context():
             solicitud = Solicitud(**data)
             db.session.add(solicitud)
