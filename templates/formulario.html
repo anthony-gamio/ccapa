@@ -50,7 +50,7 @@
         <p class="text-center text-muted">Completa el formulario y obtendrás un código de atención.</p>
 
         <div class="card p-4 shadow-sm mx-auto" style="max-width: 600px;">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
 
                 <h5 class="text-primary">Datos del Cliente</h5>
@@ -140,6 +140,12 @@
                     {{ form.servicios_adicionales(class="form-control", placeholder="Ej. Seguro, almacenamiento") }}
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Adjuntar archivo</label>
+                    {{ form.archivo(class="form-control") }}
+                    <small class="text-muted">Formatos permitidos: JPG, PNG, PDF, DOCX</small>
+                </div>
+                
                 <div class="mb-3">
                     <label class="form-label">Comentarios</label>
                     {{ form.comentarios(class="form-control", rows=3, placeholder="Notas adicionales") }}

@@ -1,3 +1,4 @@
+import os
 from flask_mail import Message
 from extensions import mail  # ✅ Usamos la instancia de mail de extensions.py
 from flask import current_app
@@ -42,6 +43,11 @@ def enviar_correo(solicitud):
 
         if hasattr(solicitud, "prioridad") and solicitud.prioridad:
             detalles += f"\nPrioridad: {solicitud.prioridad}"
+
+        if solicitud.archivo:
+            filepath = os.path.join("uploads", solicitud.archivo)
+            with open(filepath, "rb") as f:
+                msg.attach(solicitud.archivo, "application/octet-stream", f.read())
 
         msg.body = detalles  # ✅ Agregamos el mensaje al cuerpo del correo
 

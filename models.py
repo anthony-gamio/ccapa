@@ -30,6 +30,8 @@ class Solicitud(db.Model):
     servicios_adicionales = db.Column(db.String(200), nullable=True)
     comentarios = db.Column(db.Text, nullable=True)
 
+    archivo = db.Column(db.String(255), nullable=True) 
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.codigo_atencion = self.generar_codigo()

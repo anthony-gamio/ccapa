@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, SelectField, TextAreaField, SubmitField, EmailField, DecimalField
 from wtforms.validators import DataRequired, Optional, Length, Email
+from flask_wtf.file import FileField, FileAllowed
 
 class SolicitudForm(FlaskForm):
 
@@ -22,5 +23,7 @@ class SolicitudForm(FlaskForm):
     tipo_carga = StringField("Tipo de Carga", validators=[Optional()])
     servicios_adicionales = StringField("Servicios Adicionales", validators=[Optional()])
     comentarios = TextAreaField("Comentarios", validators=[Optional()])
+
+    archivo = FileField("Adjuntar archivo", validators=[FileAllowed(["jpg", "png", "pdf", "docx"], "Solo se permiten archivos JPG, PNG, PDF y DOCX")])
     
     submit = SubmitField("Enviar Solicitud")
