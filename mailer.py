@@ -8,7 +8,7 @@ def enviar_correo(solicitud):
         msg = Message(
             "Nueva Solicitud de Cotización",
             sender=current_app.config["MAIL_DEFAULT_SENDER"],  # Asegurar remitente
-            recipients=["anthony.gamio.a@uni.pe"]  # Múltiples correos
+            recipients=["anthony.gamio.a@uni.pe", "pccanto@ccapaeirl.com"]  # Múltiples correos
         )
 
         detalles = f"""
