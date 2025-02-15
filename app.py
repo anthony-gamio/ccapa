@@ -21,7 +21,8 @@ mail.init_app(app)
 @app.route("/", methods=["GET", "POST"])
 def formulario():
     form = SolicitudForm()
-    if form.validate_on_submit():
+
+    if request.method == "POST":
         file = request.files.get("archivo")  # Obtiene el archivo de manera segura
         filename = None  # Evita errores si no se sube archivo
 
